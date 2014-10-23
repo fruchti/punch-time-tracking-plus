@@ -107,7 +107,7 @@ class Punch(object):
             home_dir = getenv("HOME")
             paths = [ home_dir, "."]
             files = [ "todo.cfg", ".todo.cfg" ]
-        if getenv("TODOTXT_CFG_FILE") == None:
+            if getenv("TODOTXT_CFG_FILE") == None:
                 configFileName = self.search_file(files, paths)
             else:
                 configFileName = getenv("TODOTXT_CFG_FILE")
