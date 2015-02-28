@@ -408,6 +408,8 @@ class Punch(object):
         if( len(self.args) == 1 ):
             dateDict = dict()
             totalTimeDict = dict()
+            totalTaskTimeDict = dict()
+            totalTime = 0
             self.open_punch_file('r')
             lines = self.punchFile.readlines()
 
@@ -451,6 +453,19 @@ class Punch(object):
                         totalTimeValue = totalTimeValue + duration
                         totalTimeDict[dateKey] = totalTimeValue
 
+                        # Create a dictionary of all tasks an their total time
+                        if( task in totalTaskTimeDict.keys()):
+                            totalTaskTimeValue = int(totalTaskTimeDict[task])
+                        else:
+                            totalTaskTimeValue = 0
+
+                        # Add elapsed time to the task's dictionary entry
+                        totalTaskTimeValue = totalTaskTimeValue + duration
+                        totalTaskTimeDict[task] = totalTaskTimeValue
+
+                        # Sum up the total Time
+                        totalTime = totalTime + duration
+
                 # Returned keys are untyped. Copy into a list of strings so we can sort.
                 dateNoneList = dateDict.keys()
                 dateList = list()
@@ -458,6 +473,7 @@ class Punch(object):
                     dateList.append(str(dateThing))
                 dateList.sort()
 
+                # Print time spent per date
                 for dateKey in dateList:
                     print dateKey[0:4] + '-' + dateKey[4:6] + '-' + dateKey[6:] + ' ' + self.format_minutes(totalTimeDict[dateKey]) +':' 
                     taskDict = dateDict[dateKey]
@@ -472,6 +488,15 @@ class Punch(object):
                         for m in minuteList:
                             sum = sum + m
                         print '\t' + taskKey + ' ' + self.format_minutes(sum)
+
+                print '\nTOTAL ' + self.format_minutes(totalTime) + ':'
+
+                # Print time spent per task
+                taskList = totalTaskTimeDict.keys()
+                taskList.sort()
+                for taskKey in taskList:
+                    print '\t' + taskKey + ' ' + self.format_minutes(totalTaskTimeDict[taskKey])
+
             # Giant else statement ends here. :)
 
             self.close_punch_file()
