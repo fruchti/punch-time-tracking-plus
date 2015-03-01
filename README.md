@@ -32,17 +32,22 @@ And when finished, punch out:
         $ punch out
         Stop timer on: Call Steve about subcontracting gig @Steve +Acme
 
-To get a report of what you have worked on, use the report command. Time spent on tasks is summed up daily.
+To get a report of what you have worked on, use the report command. Time spent on tasks is summed up daily and per task.
 
         $ punch rep
-        2009-03-12:
+        2009-03-12 (22 minutes):
                 Prepare project proposal for Acme +Acme (22 minutes)
-        2009-03-14:
+        2009-03-14 (32 minutes):
                 Call Steve about subcontracting gig @Steve +Acme (0 minutes)
                 Prepare invoices for February (31 minutes)
                 Prepare project proposal for Acme +Acme (1 minutes)
-        2009-03-16:
+        2009-03-16 (1 minutes):
                 Prepare project proposal for Acme +Acme (1 minutes)
+                
+        TOTAL (55 minutes):
+                Call Steve about subcontracting gig @Steve +Acme (0 minutes)
+                Prepare invoices for February (31 minutes)
+                Prepare project proposal for Acme +Acme (24 minutes)
 
 Punch requires Python. Punch is a work in progress. Feel free to suggest enhancements you'd like to see.
 
